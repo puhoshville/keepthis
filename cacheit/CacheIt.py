@@ -30,7 +30,12 @@ class CacheIt:
         return sha224(input_string.encode()).hexdigest()
 
     def _hash_ndarray(self, input_array):
-        assert isinstance(input_array, ndarray)
+        if not isinstance(input_array, ndarray):
+            raise CacheItValueError(
+                "numpy.ndarray instance was expected but got {}".format(
+                    type(input_array)
+                )
+            )
         string = str(input_array.data.tobytes())
         return self._hash_string(string)
 
