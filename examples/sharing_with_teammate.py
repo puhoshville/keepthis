@@ -4,10 +4,10 @@ from cacheit import CacheIt
 
 # provide connection parameters to memcached
 # DO NOT PROVIDE PRODUCTION PARAMETERS! WE WILL FLUSH RESULT in the end! =)
-do_magick = CacheIt('localhost', 11211)
+do_magic = CacheIt('localhost', 11211)
 
 
-@do_magick.cacheit_decorator
+@do_magic.cacheit_decorator
 def some_long_calculations(arg1, arg2, kwarg=100):
     """Implement some long to wait calculations"""
     time.sleep(3)
@@ -27,4 +27,4 @@ if __name__ == '__main__':
     print("Teammate got result: {}\nTime spent: {}".format(result, time.time() - time_start))
 
 
-    do_magick._clear_cache()
+    do_magic._clear_cache()
