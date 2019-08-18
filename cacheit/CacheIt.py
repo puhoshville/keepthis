@@ -36,7 +36,7 @@ class CacheIt:
                     type(input_array)
                 )
             )
-        string = str(input_array.data.tobytes())
+        string = input_array.data.hex()
         return self._hash_string(string)
 
     def _hash_object(self, entity):
