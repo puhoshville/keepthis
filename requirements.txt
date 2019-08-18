@@ -1,0 +1,1 @@
+pymemcache==2.2.2
