@@ -1,7 +1,7 @@
 import hashlib
 import json
 
-from numpy import ndarray
+import numpy as np
 from pymemcache import serde
 from pymemcache.client import base
 
@@ -18,7 +18,7 @@ class CacheIt:
         self.memcached_port = memcached_port
         self.requests_count = 0
         self.__supported_entity_types__ = (
-            ndarray,
+            np.ndarray,
             str,
             int,
             float,
@@ -30,7 +30,7 @@ class CacheIt:
         return sha224(input_string.encode()).hexdigest()
 
     def _hash_ndarray(self, input_array):
-        if not isinstance(input_array, ndarray):
+        if not isinstance(input_array, np.ndarray):
             raise CacheItValueError(
                 "numpy.ndarray instance was expected but got {}".format(
                     type(input_array)
@@ -52,7 +52,7 @@ class CacheIt:
                     self.__supported_entity_types__,
                 )
             )
-        if isinstance(entity, ndarray):
+        if isinstance(entity, np.ndarray):
             # getting hash from numpy.ndarray
             return self._hash_ndarray(entity)
         else:
