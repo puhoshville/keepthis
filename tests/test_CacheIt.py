@@ -17,5 +17,3 @@ def test_get_unique_key():
     b = some_func(1, 2, kwarg1=-1, kwarg2=-2)
     assert a == b
     assert instance.requests_count == 1
-
-

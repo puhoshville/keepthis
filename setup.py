@@ -4,7 +4,8 @@ from setuptools import setup
 version = "0.0.1"
 
 install_requires = [
-    'pymemcache==2.2.2'
+    'pymemcache==2.2.2',
+    'numpy==1.17.0'
 ]
 
 setup(
