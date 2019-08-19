@@ -1,3 +1,5 @@
+import numpy as np
+
 from cacheit import CacheIt
 
 
@@ -17,3 +19,10 @@ def test_get_unique_key():
     b = some_func(1, 2, kwarg1=-1, kwarg2=-2)
     assert a == b
     assert instance.requests_count == 1
+
+
+def test_hash_ndarray():
+    array = np.array([1, 2, 3, 4])
+    result_hash = CacheIt._hash_ndarray(array)
+    assert isinstance(result_hash, str)
+    assert result_hash == '46c4f0c1fb94a6327fafea6bb1ddf0dd4ddb09f77142e1afae176f96'
