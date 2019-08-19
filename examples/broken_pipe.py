@@ -1,13 +1,13 @@
 import time
 
-from cacheit import CacheIt
+from keepthis import KeepThis
 
 
 FAULT = True
 
-do_magic = CacheIt('localhost', 11211)
+keep = KeepThis('localhost', 11211)
 
-@do_magic.cacheit_decorator
+@keep.this
 def get_fibonacci(num):
     if num == 0:
         return 1
@@ -40,4 +40,4 @@ if __name__ == '__main__':
             sequence.append(get_fibonacci(i))
         print("Time spent on second run: {}".format(time.time() - start_time))
 
-    do_magic._clear_cache()
+    keep.drop()

@@ -10,7 +10,7 @@ install_requires = [
 ]
 
 setup(
-    name='cache-it',
+    name='keep_this',
     version=version,
     packages=[''],
     install_requires=install_requires,
@@ -18,6 +18,6 @@ setup(
     license='MIT',
     author='Dmitrii Pukhov',
     author_email='pukhovdn@yandex.ru',
-    description='CacheIt - data scientist helper, tool for caching artifacts which allow easily to share it with '
+    description='KeepThis - data scientist helper, tool for caching artifacts which allow easily to share it with '
                 'your teammates.'
 )
