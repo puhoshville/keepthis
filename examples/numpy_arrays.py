@@ -2,12 +2,12 @@ import time
 
 import numpy as np
 
-from cacheit import CacheIt
+from keepthis import KeepThis
 
-instanse = CacheIt('localhost', 11211)
+keep = KeepThis('localhost', 11211)
 
 
-@instanse.cacheit_decorator
+@keep.this
 def sum_of_squares(array):
     time.sleep(5)
     return np.sum(np.power(array, 10))
@@ -23,4 +23,4 @@ if __name__ == '__main__':
     sum_of_squares(asd)
     print("Second run in {} seconds".format(time.time() - start_time))
 
-    instanse._clear_cache()
+    keep.drop()

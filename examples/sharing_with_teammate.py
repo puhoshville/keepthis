@@ -1,13 +1,13 @@
 import time
 
-from cacheit import CacheIt
+from keepthis import KeepThis
 
 # provide connection parameters to memcached
 # DO NOT PROVIDE PRODUCTION PARAMETERS! WE WILL FLUSH RESULT in the end! =)
-do_magic = CacheIt('localhost', 11211)
+keep = KeepThis('localhost', 11211)
 
 
-@do_magic.cacheit_decorator
+@keep.this
 def some_long_calculations(arg1, arg2, kwarg=100):
     """Implement some long to wait calculations"""
     time.sleep(3)
@@ -26,5 +26,5 @@ if __name__ == '__main__':
     result = some_long_calculations(1, 2, kwarg=40)
     print("Teammate got result: {}\nTime spent: {}".format(result, time.time() - time_start))
 
-
-    do_magic._clear_cache()
+    # clear cacje
+    keep.drop()

@@ -6,10 +6,10 @@ import pandas as pd
 from pymemcache import serde
 from pymemcache.client import base
 
-from cacheit.exceptions import CacheItValueError
+from keepthis.exceptions import KeepThisValueError
 
 
-class CacheIt:
+class KeepThis:
     def __init__(
             self,
             memcached_host,
@@ -33,24 +33,24 @@ class CacheIt:
     @staticmethod
     def _hash_ndarray(input_array):
         if not isinstance(input_array, np.ndarray):
-            raise CacheItValueError(
+            raise KeepThisValueError(
                 "numpy.ndarray instance was expected but got {}".format(
                     type(input_array)
                 )
             )
         string = input_array.data.hex()
-        return CacheIt._hash_string(string)
+        return KeepThis._hash_string(string)
 
     @staticmethod
     def _hash_pandas(input_dataframe):
         if not isinstance(input_dataframe, (pd.DataFrame, pd.Series, pd.Index)):
-            raise CacheItValueError(
+            raise KeepThisValueError(
                 "numpy.ndarray instance was expected but got {}".format(
                     type(input_dataframe)
                 )
             )
         string = pd.util.hash_pandas_object(input_dataframe).values.data.hex()
-        return CacheIt._hash_string(string)
+        return KeepThis._hash_string(string)
 
     def _hash_object(self, entity):
         """Converting to string non-supported by JSON objects.
@@ -59,7 +59,7 @@ class CacheIt:
         :return: object or hash-string
         """
         if not isinstance(entity, self.__supported_entity_types__):
-            raise CacheItValueError(
+            raise KeepThisValueError(
                 "Entity is has type {}, while only {} supports".format(
                     type(entity),
                     self.__supported_entity_types__,
@@ -74,7 +74,7 @@ class CacheIt:
         else:
             return entity
 
-    def _clear_cache(self):
+    def drop(self):
         memcached = self._get_connection()
         memcached.flush_all()
         memcached.close()
@@ -96,7 +96,7 @@ class CacheIt:
         resulting_hash = self._hash_string(string_to_hash)
         return resulting_hash
 
-    def cacheit_decorator(self, func, *args, **kwargs):
+    def this(self, func, *args, **kwargs):
         def func_wrapper(*args, **kwargs):
             unique_hash = self._get_unique_key(func, *args, **kwargs)
             memcached = self._get_connection()

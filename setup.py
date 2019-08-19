@@ -5,11 +5,12 @@ version = "0.0.1"
 
 install_requires = [
     'pymemcache==2.2.2',
-    'numpy==1.17.0'
+    'numpy==1.17.0',
+    'pandas==0.25.0',
 ]
 
 setup(
-    name='cache-it',
+    name='keep_this',
     version=version,
     packages=[''],
     install_requires=install_requires,
@@ -17,6 +18,6 @@ setup(
     license='MIT',
     author='Dmitrii Pukhov',
     author_email='pukhovdn@yandex.ru',
-    description='CacheIt - data scientist helper, tool for caching artifacts which allow easily to share it with '
+    description='KeepThis - data scientist helper, tool for caching artifacts which allow easily to share it with '
                 'your teammates.'
 )
