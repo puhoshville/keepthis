@@ -2,6 +2,7 @@ import hashlib
 import json
 
 import numpy as np
+import pandas as pd
 from pymemcache import serde
 from pymemcache.client import base
 
@@ -39,6 +40,17 @@ class CacheIt:
         string = input_array.data.hex()
         return self._hash_string(string)
 
+    @staticmethod
+    def _hash_pandas(input_dataframe):
+        if not isinstance(input_dataframe, (pd.DataFrame, pd.Series, pd.Index)):
+            raise CacheItValueError(
+                "numpy.ndarray instance was expected but got {}".format(
+                    type(input_dataframe)
+                )
+            )
+        string = pd.util.hash_pandas_object(input_dataframe).values.data.hex()
+        return CacheIt._hash_string(string)
+
     def _hash_object(self, entity):
         """Converting to string non-supported by JSON objects.
 
@@ -55,6 +67,9 @@ class CacheIt:
         if isinstance(entity, np.ndarray):
             # getting hash from numpy.ndarray
             return self._hash_ndarray(entity)
+        elif isinstance(entity, (pd.DataFrame, pd.Series, pd.Index)):
+            # getting hash from pandas.DataFrame
+            return self._hash_pandas(entity)
         else:
             return entity
 
