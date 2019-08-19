@@ -30,7 +30,8 @@ class CacheIt:
         sha224 = hashlib.sha224
         return sha224(input_string.encode()).hexdigest()
 
-    def _hash_ndarray(self, input_array):
+    @staticmethod
+    def _hash_ndarray(input_array):
         if not isinstance(input_array, np.ndarray):
             raise CacheItValueError(
                 "numpy.ndarray instance was expected but got {}".format(
@@ -38,7 +39,7 @@ class CacheIt:
                 )
             )
         string = input_array.data.hex()
-        return self._hash_string(string)
+        return CacheIt._hash_string(string)
 
     @staticmethod
     def _hash_pandas(input_dataframe):
