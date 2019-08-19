@@ -27,3 +27,8 @@ I recommend you to use docker image for your first-time interactions with librar
 docker run -d --rm -p 11211:11211 memcached
 ```
 [More information about docker image](https://hub.docker.com/_/memcached)
+
+
+### More examples
+
+You can find out usages of KeepThis in `examples/` and `notebooks/`
