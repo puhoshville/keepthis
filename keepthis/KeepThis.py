@@ -6,6 +6,7 @@ import pandas as pd
 from pymemcache import serde
 from pymemcache.client import base
 
+from keepthis.MemcachedConnection import MemcachedConnection
 from keepthis.exceptions import KeepThisValueError
 
 
@@ -99,16 +100,16 @@ class KeepThis:
     def this(self, func, *args, **kwargs):
         def func_wrapper(*args, **kwargs):
             unique_hash = self._get_unique_key(func, *args, **kwargs)
-            memcached = self._get_connection()
-            cached_value = memcached.get(unique_hash)
-            if cached_value is not None:
-                self.requests_count += 1
-                memcached.close()
-                return cached_value
+            with MemcachedConnection(self.memcached_host, self.memcached_port) as memcached:
+                cached_value = memcached.get(unique_hash)
+                if cached_value is not None:
+                    self.requests_count += 1
+                    memcached.close()
+                    return cached_value
 
-            value_to_cache = func(*args, **kwargs)
-            memcached.set(unique_hash, value_to_cache)
-            memcached.close()
+                value_to_cache = func(*args, **kwargs)
+                memcached.set(unique_hash, value_to_cache)
+
             return value_to_cache
 
         return func_wrapper
