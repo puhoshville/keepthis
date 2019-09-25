@@ -18,7 +18,6 @@ class KeepThis:
     ):
         self.memcached_host = memcached_host
         self.memcached_port = memcached_port
-        self.requests_count = 0
         self.__supported_entity_types__ = (
             np.ndarray,
             str,
@@ -103,7 +102,6 @@ class KeepThis:
             with MemcachedConnection(self.memcached_host, self.memcached_port) as memcached:
                 cached_value = memcached.get(unique_hash)
                 if cached_value is not None:
-                    self.requests_count += 1
                     memcached.close()
                     return cached_value
 
