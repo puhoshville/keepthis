@@ -20,7 +20,6 @@ def test_get_unique_key():
     a = some_func(1, 2, kwarg1=-1, kwarg2=-2)
     b = some_func(1, 2, kwarg1=-1, kwarg2=-2)
     assert a == b
-    assert keep.requests_count == 1
 
 
 def test_hash_dataframe():
