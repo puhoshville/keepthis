@@ -1,17 +1,24 @@
+import unittest.mock as mock
+
 import numpy as np
 import pandas as pd
-
+from pymemcache.test.utils import MockMemcacheClient
 
 from keepthis import KeepThis
+
+
+class CustomMockMemcacheClient(MockMemcacheClient):
+    def close(self):
+        pass
 
 
 def test_hash_string():
     assert KeepThis._hash_string('asd') == 'cda1d665441ef8120c3d3e82610e74ab0d3b043763784676654d8ef1'
 
 
+@mock.patch('pymemcache.client.base.Client', new=CustomMockMemcacheClient)
 def test_get_unique_key():
     keep = KeepThis('localhost', 11211)
-    keep.drop()
 
     @keep.this
     def some_func(arg1, arg2, kwarg1=1, kwarg2=2):
@@ -42,7 +49,7 @@ def test_hash_index():
     assert isinstance(hash_result, str)
     assert hash_result == '8c3496da2b4c2ce381069335b16e9a249c876c33f9729e8ba9abbd81'
 
-    
+
 def test_hash_ndarray():
     array = np.array([1, 2, 3, 4])
     result_hash = KeepThis._hash_ndarray(array)
