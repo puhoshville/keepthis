@@ -51,7 +51,7 @@ def test_hash_index():
 
 
 def test_hash_ndarray():
-    array = np.array([1, 2, 3, 4])
+    array = np.array([1, 2, 3, 4], np.int64)
     result_hash = KeepThis._hash_ndarray(array)
     assert isinstance(result_hash, str)
     assert result_hash == '46c4f0c1fb94a6327fafea6bb1ddf0dd4ddb09f77142e1afae176f96'
