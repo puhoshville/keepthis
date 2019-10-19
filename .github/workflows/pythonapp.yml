@@ -1,16 +1,16 @@
-name: Python application
+name: test
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
 
     runs-on: ${{ matrix.os }}
     strategy:
-      max-parallel: 4
+      max-parallel: 16
       matrix:
         python-version: [3.5, 3.6, 3.7]
-        os: [ubuntu-18.04, ubuntu-16.04, macOS-10.14]
+        os: [ubuntu-18.04, ubuntu-16.04, macOS-10.14, windows-2016, windows-2019]
 
     steps:
     - uses: actions/checkout@v1
