@@ -10,7 +10,7 @@ install_requires = [
 ]
 
 setup(
-    name='keep_this',
+    name='keepthis',
     version=version,
     packages=[''],
     install_requires=install_requires,
