@@ -12,7 +12,7 @@ install_requires = [
 setup(
     name='keepthis',
     version=version,
-    packages=[''],
+    packages=['keepthis'],
     install_requires=install_requires,
     url='github.com/puhoshville',
     license='MIT',
