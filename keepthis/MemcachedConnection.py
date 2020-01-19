@@ -10,8 +10,7 @@ class MemcachedConnection:
     def __enter__(self):
         self.connection = base.Client(
             (self.host, self.port),
-            serializer=serde.python_memcache_serializer,
-            deserializer=serde.python_memcache_deserializer,
+            serde=serde.PickleSerde(),
         )
         return self.connection
 
