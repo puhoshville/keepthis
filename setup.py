@@ -1,12 +1,12 @@
 from setuptools import setup
 
 
-version = "0.0.3"
+version = "0.0.4"
 
 install_requires = [
-    'pymemcache>=2.2.2',
-    'numpy>=1.17.0',
-    'pandas>=0.25.0',
+    'pymemcache>=3.0.0',
+    'numpy>=1.18.1',
+    'pandas>=0.25.3',
 ]
 
 
@@ -19,8 +19,8 @@ setup(
     version=version,
     author='Dmitrii Pukhov',
     author_email='pukhovdn@yandex.ru',
-    description='KeepThis - data scientist helper, tool for caching artifacts which allow easily to share it with '
-                'your teammates.',
+    description='KeepThis - helper tool for Data Scientists collaborative work. '
+                'Cache artifacts and share them with your teammates.',
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/puhoshville/keep-this",
