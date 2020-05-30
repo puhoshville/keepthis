@@ -35,13 +35,39 @@ cd keepthis
 pip install -e .
 ```
 
-Please ensure that you have memcached instance. 
+### How to setup local memcached server
+ 
 I recommend you to use docker image for your first-time interactions with library:
 ```bash
 docker run -d --rm -p 11211:11211 memcached
 ```
 [More information about docker image](https://hub.docker.com/_/memcached)
 
+
+### How to use KeepThis
+
+! Before using KeepThis please make sure that you have memcached instance to store cache.
+
+1. Import and initialize instance 
+    ```python
+    from keepthis import KeepThis
+
+    
+    keep = KeepThis('localhost', 11211)  # connect to local memcached instance
+    ```
+    
+2. Define function with keepthis decorator
+    ```python
+    @keep.this
+    def get_fibonacci(num):
+        if num == 0:
+            return 1
+        if num == 1:
+            return 1    
+        return get_fibonacci(num-1) + get_fibonacci(num-2)
+
+    ```
+3. Done! All function execution's results will be stored in memcached and will be reused if nessecary. 
 
 ### More examples
 
