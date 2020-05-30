@@ -17,11 +17,23 @@ Using [memcached](https://memcached.org) as a backend allows you to cache really
 
 ### How to install
 
-Install the package.
+Using pip:
 
-1. Clone this repo
-2. Open repo's root path in terminal
-3. Install package using `pip install -e .`
+```bash
+pip install keepthis
+```
+
+From source:
+```bash
+# 1. clone this repo
+git clone https://github.com/puhoshville/keepthis.git
+
+# 2. cd to repository's root directory
+cd keepthis
+
+# 3. install
+pip install -e .
+```
 
 Please ensure that you have memcached instance. 
 I recommend you to use docker image for your first-time interactions with library:
