@@ -2,14 +2,14 @@
 
 ![keepthis_header_gif](imgs/keepthis_header.gif)
 
-## About project
+## About the project
 
-Scientific toolkit which will inspire you and your team to work with more collaboration than ever before.
+A scientific toolkit that will inspire you and your team to work with more collaboration than ever before.
 
 It works almost like LRU Cache but allows you:
-1. Use same cache in different processes;
-2. Use same cache at the different moments of time;
-3. Easily share your local runtime's results with your teammates!  
+1. Use the same cache in different processes;
+2. Use the same cache at the different moments of time;
+3. Easily share your local runtime results with your teammates!  
 
 Using [memcached](https://memcached.org) as a backend allows you to cache really large things.
 
@@ -37,7 +37,7 @@ pip install -e .
 
 ### How to setup local memcached server
  
-I recommend you to use docker image for your first-time interactions with library:
+I recommend you to use docker image for your first-time interactions with the library:
 ```bash
 docker run -d --rm -p 11211:11211 memcached
 ```
@@ -56,7 +56,7 @@ docker run -d --rm -p 11211:11211 memcached
     keep = KeepThis('localhost', 11211)  # connect to local memcached instance
     ```
     
-2. Define function with keepthis decorator
+2. Define a function with keepthis decorator
     ```python
     @keep.this
     def get_fibonacci(num):
@@ -67,8 +67,8 @@ docker run -d --rm -p 11211:11211 memcached
         return get_fibonacci(num-1) + get_fibonacci(num-2)
 
     ```
-3. Done! All function execution's results will be stored in memcached and will be reused if nessecary. 
+3. Done! All computations will be stored in memcached and will be reused if needed. 
 
 ### More examples
 
-You can find out usages of KeepThis in `examples/` and `notebooks/`
+You can find out usage examples of KeepThis in `examples/` and `notebooks/`
