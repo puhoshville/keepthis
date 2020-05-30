@@ -1,5 +1,7 @@
 # KeepThis
 
+![keepthis_header_gif](imgs/keepthis_header.gif)
+
 ## About project
 
 Scientific toolkit which will inspire you and your team to work with more collaboration than ever before.
